@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hero - Admin</title>
+
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <!-- 导入art-template -->
+  <script src="/node_modules/art-template/lib/template-web.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="page-header container">
+      <h1><a href="/">王者荣耀</a> <small>英雄管理器</small></h1>
+    </div>
+  </header>
+  <div class="container hero-list" id="heroInfo">
+    <script id="info" type="text/html">
+      <p>ID：{{id}} </p>
+        <p>英雄名称：{{name}} </p>
+        <p>英雄性别： {{gender}} </p>
+      </script>
+  </div>
+  <script>
+    $(function(){
+      console.log(location);
+      $.ajax({
+        url: "/heroInfo"+location.search,
+        type:'get',
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          $('#heroInfo').html(template('info',data));
+        }
+      });
+    })
+  </script>
+</body>
+
+</html>
